@@ -4,9 +4,9 @@ from uc3m_logistics import OrderManager
 
 class MyTestCase(unittest.TestCase):
     """class for testing the register_order method"""
-    def test_something( self ):
+    def test_1( self ):
         """dummy test"""
-        self.assertEqual(True, False)
+        self.assertEqual(True, OrderManager.validate_ean13(self.product_id))
 
 
 if __name__ == '__main__':

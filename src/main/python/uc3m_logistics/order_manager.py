@@ -1,5 +1,6 @@
 """Module """
 from .order_request import OrderRequest
+import re
 class OrderManager:
     """Class for providing the methods for managing the orders"""
     def __init__(self):
@@ -10,9 +11,9 @@ class OrderManager:
         # PLEASE INCLUDE HERE THE CODE FOR VALIDATING THE GUID
         # RETURN TRUE IF THE GUID IS RIGHT, OR FALSE IN OTHER CASE
         pattern_rgx = re.compile("[0-9]{13}")
-        valid_pattern = pattern_rgx.match(ean_13)
+        valid_pattern = pattern_rgx.match(ean13_code)
         if valid_pattern:
-            digits = [int(i) for i in ean_13]
+            digits = [int(i) for i in ean13_code]
             sum_pares = 0
             sum_impares = 0
             for i in range(len(digits) - 1):
@@ -26,10 +27,12 @@ class OrderManager:
             if valid_digit == digits[-1]:
                 print("El código cumple con el estandar EAN13")
                 return True
-        print("El código no cumple con el estandar EAN13")
         return False
 
-    def register_order(self,product_id,adress,ordeer_typt,phone,zip_code):
-        my_order=OrderRequest(product_id=product_id, delivery_address=address, order_type=order_type
-                              phone_number=phone, zip_code=zip_code)
-        return my_order.order_id
+    def register_order(self,product_id,adress,order_type,phone,zip_code):
+        valid = self.validate_ean13(product_id)
+        if valid:
+            my_order=OrderRequest(product_id=product_id, delivery_address=adress, order_type=order_type,
+                                  phone_number=phone, zip_code=zip_code)
+            return my_order.order_id
+        raise TypeError("Invalid EAN13 code string")
