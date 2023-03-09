@@ -1,6 +1,7 @@
 """Module """
-from .order_request import OrderRequest
 import re
+from .order_request import OrderRequest
+from .order_management_exception import OrderManagementException
 class OrderManager:
     """Class for providing the methods for managing the orders"""
     def __init__(self):
@@ -25,14 +26,13 @@ class OrderManager:
             valid_digit = 10 - final % 10
 
             if valid_digit == digits[-1]:
-                print("El código cumple con el estandar EAN13")
                 return True
         return False
 
     def register_order(self, product_id, address, order_type, phone, zip_code):
         valid = self.validate_ean13(product_id)
         if valid:
-            my_order=OrderRequest(product_id=product_id, delivery_address=address, order_type=order_type,
+            my_order = OrderRequest(product_id=product_id, delivery_address=address, order_type=order_type,
                                   phone_number=phone, zip_code=zip_code)
             return my_order.order_id
-        raise TypeError("Invalid EAN13 code string")
+        raise OrderManagementException("Invalid EAN13 code string")

@@ -13,7 +13,6 @@ class OrderRequest:
         self.__zip_code = zip_code
         justnow = datetime.utcnow()
         self.__time_stamp = datetime.timestamp(justnow)
-        self.__time_stamp = 1676833566.703651
 
     def __str__(self):
         return "OrderRequest:" + json.dumps(self.__dict__)
