@@ -29,10 +29,10 @@ class OrderManager:
                 return True
         return False
 
-    def register_order(self,product_id,adress,order_type,phone,zip_code):
+    def register_order(self, product_id, address, order_type, phone, zip_code):
         valid = self.validate_ean13(product_id)
         if valid:
-            my_order=OrderRequest(product_id=product_id, delivery_address=adress, order_type=order_type,
+            my_order=OrderRequest(product_id=product_id, delivery_address=address, order_type=order_type,
                                   phone_number=phone, zip_code=zip_code)
             return my_order.order_id
         raise TypeError("Invalid EAN13 code string")
