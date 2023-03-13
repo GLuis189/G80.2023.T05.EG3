@@ -1,5 +1,8 @@
 """Module """
+import json
 import re
+import os
+from pathlib import Path
 from .order_request import OrderRequest
 from .order_management_exception import OrderManagementException
 class OrderManager:
@@ -30,9 +33,19 @@ class OrderManager:
         return False
 
     def register_order(self, product_id, address, order_type, phone, zip_code):
+        if order_type != "PREMIUM" or order_type != "REGULAR":
+            raise OrderManagementException("Invalid Order Type")
+        if len(address)<20 and len(address)>100:
+            if len(re.findall(" ",address))<2:
+                raise OrderManagementException("Invalid Address")
         valid = self.validate_ean13(product_id)
         if valid:
             my_order = OrderRequest(product_id=product_id, delivery_address=address, order_type=order_type,
                                   phone_number=phone, zip_code=zip_code)
+            """try:
+                with open("./file_store.json", "w", encoding= "utf-8", newline= "") as file
+                    json.dump(my_order, file, indent=2)
+            except FileNotFoundError as ex:
+                raise OrderManagementException("Wrong file or file path") from ex"""
             return my_order.order_id
         raise OrderManagementException("Invalid EAN13 code string")
