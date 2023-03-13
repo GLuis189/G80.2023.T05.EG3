@@ -100,3 +100,24 @@ class TestOrderManager(TestCase):
             value = my_order.register_order("3662168005326", "PREMIUM", "C/LISBOA,4, MADRID, SPAIN", "1234567899",
                                             "28005")
         self.assertEqual("Invalid Phone", cm.exception.message)
+
+    def test_with_zip_code_character(self):
+        my_order = OrderManager()
+        with self.assertRaises(OrderManagementException) as cm:
+            value = my_order.register_order("8421691423220", "PREMIUM", "C/LISBOA,4, MADRID, SPAIN", "123456789",
+                                            "2800A")
+        self.assertEqual("Invalid Zip Code", cm.exception.message)
+
+    def test_with_zip_code_length_short(self):
+        my_order = OrderManager()
+        with self.assertRaises(OrderManagementException) as cm:
+            value = my_order.register_order("8421691423220", "PREMIUM", "C/LISBOA,4, MADRID, SPAIN", "123456789",
+                                            "2800")
+        self.assertEqual("Invalid Zip Code", cm.exception.message)
+
+    def test_with_zip_code_length_more(self):
+        my_order = OrderManager()
+        with self.assertRaises(OrderManagementException) as cm:
+            value = my_order.register_order("3662168005326", "PREMIUM", "C/LISBOA,4, MADRID, SPAIN", "123456789",
+                                            "280055")
+        self.assertEqual("Invalid Zip Code", cm.exception.message)

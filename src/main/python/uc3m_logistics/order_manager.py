@@ -14,7 +14,7 @@ class OrderManager:
     def validate_ean13(ean13_code):
         # PLEASE INCLUDE HERE THE CODE FOR VALIDATING THE GUID
         # RETURN TRUE IF THE GUID IS RIGHT, OR FALSE IN OTHER CASE
-        pattern_rgx = re.compile("[0-9]{13}&")
+        pattern_rgx = re.compile("[0-9]{13}$")
         valid_pattern = pattern_rgx.match(ean13_code)
         if valid_pattern:
             digits = [int(i) for i in ean13_code]
@@ -42,6 +42,9 @@ class OrderManager:
         phone_rgx = re.compile("[0-9]{9}$")
         if not phone_rgx.match(phone):
             raise OrderManagementException("Invalid Phone")
+        zip_rgx = re.compile("[0-9]{5}$")
+        if not zip_rgx.match(zip_code):
+            raise OrderManagementException("Invalid Zip Code")
         valid = self.validate_ean13(product_id)
         if valid:
             my_order = OrderRequest(product_id=product_id, delivery_address=address, order_type=order_type,
