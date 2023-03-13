@@ -58,18 +58,45 @@ class TestOrderManager(TestCase):
                                             "28005")
         self.assertEqual("Invalid Order Type", cm.exception.message)
 
-    def test_with_address_short(self):
+    def test_with_address_wrong_short(self):
         my_order = OrderManager()
         with self.assertRaises(OrderManagementException) as cm:
-            value = my_order.register_order("842169142322", "PREMIUM", "C/LISBOA,4, MADRID ", "123456789",
+            value = my_order.register_order("8421691423220", "PREMIUM", "C/LISBOA,4, MADRIDD", "123456789",
                                             "28005")
         self.assertEqual("Invalid Address", cm.exception.message)
 
-    def test_with_address_long(self):
-        lista = ["a"]*101
+    def test_with_address_wrong_long(self):
+        string = "a" * 101
         my_order = OrderManager()
         with self.assertRaises(OrderManagementException) as cm:
-            value = my_order.register_order("842169142322", str(lista), "PREMIUM", "123456789",
+            value = my_order.register_order("3662168005326", "PREMIUM", string, "123456789",
                                             "28005")
         self.assertEqual("Invalid Address", cm.exception.message)
 
+    def test_with_address_wrong_spaces(self):
+        my_order = OrderManager()
+        with self.assertRaises(OrderManagementException) as cm:
+            value = my_order.register_order("8421691423220", "PREMIUM", "C/LISBOA,4,MADRID,SPAIN", "123456789",
+                                            "28005")
+        self.assertEqual("Invalid Address", cm.exception.message)
+
+    def test_with_phone_wrong_character(self):
+        my_order = OrderManager()
+        with self.assertRaises(OrderManagementException) as cm:
+            value = my_order.register_order("8421691423220", "PREMIUM", "C/LISBOA,4, MADRID, SPAIN", "12345678A",
+                                            "28005")
+        self.assertEqual("Invalid Phone", cm.exception.message)
+
+    def test_with_phone_wrong_length_short(self):
+        my_order = OrderManager()
+        with self.assertRaises(OrderManagementException) as cm:
+            value = my_order.register_order("8421691423220", "PREMIUM", "C/LISBOA,4, MADRID, SPAIN", "12345678",
+                                            "28005")
+        self.assertEqual("Invalid Phone", cm.exception.message)
+
+    def test_with_phone_wrong_length_more(self):
+        my_order = OrderManager()
+        with self.assertRaises(OrderManagementException) as cm:
+            value = my_order.register_order("3662168005326", "PREMIUM", "C/LISBOA,4, MADRID, SPAIN", "1234567899",
+                                            "28005")
+        self.assertEqual("Invalid Phone", cm.exception.message)

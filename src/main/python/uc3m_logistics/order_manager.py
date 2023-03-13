@@ -14,7 +14,7 @@ class OrderManager:
     def validate_ean13(ean13_code):
         # PLEASE INCLUDE HERE THE CODE FOR VALIDATING THE GUID
         # RETURN TRUE IF THE GUID IS RIGHT, OR FALSE IN OTHER CASE
-        pattern_rgx = re.compile("[0-9]{13}")
+        pattern_rgx = re.compile("[0-9]{13}&")
         valid_pattern = pattern_rgx.match(ean13_code)
         if valid_pattern:
             digits = [int(i) for i in ean13_code]
@@ -32,12 +32,16 @@ class OrderManager:
                 return True
         return False
 
-    def register_order(self, product_id, address, order_type, phone, zip_code):
-        if order_type != "PREMIUM" or order_type != "REGULAR":
+    def register_order(self, product_id, order_type, address, phone, zip_code):
+        if order_type != "PREMIUM" and order_type != "REGULAR":
             raise OrderManagementException("Invalid Order Type")
-        if len(address)<20 and len(address)>100:
-            if len(re.findall(" ",address))<2:
-                raise OrderManagementException("Invalid Address")
+        if len(address) < 20 and len(address) > 100:
+            raise OrderManagementException("Invalid Address")
+        if len(re.findall(" ", address)) < 2:
+            raise OrderManagementException("Invalid Address")
+        phone_rgx = re.compile("[0-9]{9}$")
+        if not phone_rgx.match(phone):
+            raise OrderManagementException("Invalid Phone")
         valid = self.validate_ean13(product_id)
         if valid:
             my_order = OrderRequest(product_id=product_id, delivery_address=address, order_type=order_type,
