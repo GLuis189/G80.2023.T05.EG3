@@ -8,21 +8,40 @@ from uc3m_logistics import OrderManagementException
 class TestOrderManager(TestCase):
 
     @freeze_time("2023-02-19")
-    def test_register_order_okey(self):
+    def test_register_order_okey_premium(self):
         JSON_FILES_PATH = str(Path.home()) + ""
         file_store = JSON_FILES_PATH + "store_order_request.json"
         if os.path.isfile(file_store):
             os.remove(file_store)
 
         my_order = OrderManager()
-        my_value = my_order.register_order(product_id="3662168005326", address="calle colmenarejo",
-                                            zip_code="28345", phone="123456789", order_type="premium")
+        my_value = my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
+                                            zip_code="28345", phone="123456789", order_type="PREMIUM")
         self.assertEqual("a5d8a05c1d4c9dfd9eb8bf48d23cd804", my_value)
         with (open(file_store,"r", encoding= "UTF-8", newline="")) as file:
             data_list= json.load(file)
         found = False
         for i in data_list:
             if i["_OrderRequest__order_id"] == "a5d8a05c1d4c9dfd9eb8bf48d23cd804":
+                found = True
+        self.assertTrue(found)
+
+    @freeze_time("2023-02-19")
+    def test_register_order_okey_regular(self):
+        JSON_FILES_PATH = str(Path.home()) + ""
+        file_store = JSON_FILES_PATH + "store_order_request.json"
+        if os.path.isfile(file_store):
+            os.remove(file_store)
+
+        my_order = OrderManager()
+        my_value = my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
+                                            zip_code="28345", phone="123456789", order_type="REGULAR")
+        self.assertEqual("2cce00815ff818105d168f74bc8ddcd3", my_value)
+        with (open(file_store,"r", encoding= "UTF-8", newline="")) as file:
+            data_list= json.load(file)
+        found = False
+        for i in data_list:
+            if i["_OrderRequest__order_id"] == "2cce00815ff818105d168f74bc8ddcd3":
                 found = True
         self.assertTrue(found)
 
@@ -100,6 +119,7 @@ class TestOrderManager(TestCase):
             value = my_order.register_order("3662168005326", "PREMIUM", "C/LISBOA,4, MADRID, SPAIN", "1234567899",
                                             "28005")
         self.assertEqual("Invalid Phone", cm.exception.message)
+
 
     def test_with_zip_code_character(self):
         my_order = OrderManager()
