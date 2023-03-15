@@ -37,7 +37,7 @@ class OrderManager:
             raise OrderManagementException("Invalid Order Type")
         if len(address) < 20 and len(address) > 100:
             raise OrderManagementException("Invalid Address")
-        if len(re.findall(" ", address)) < 2:
+        if len(re.findall(" ", address)) == 0:
             raise OrderManagementException("Invalid Address")
         phone_rgx = re.compile("[0-9]{9}$")
         if not phone_rgx.match(phone):
