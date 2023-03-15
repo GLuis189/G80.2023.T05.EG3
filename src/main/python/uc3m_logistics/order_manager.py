@@ -43,16 +43,28 @@ class OrderManager:
         if not phone_rgx.match(phone):
             raise OrderManagementException("Invalid Phone")
         zip_rgx = re.compile("[0-9]{5}$")
-        if not zip_rgx.match(zip_code):
+        if not zip_rgx.match(zip_code) or (int(zip_code[0]) > 4 and int(zip_code[1]) > 2):
             raise OrderManagementException("Invalid Zip Code")
         valid = self.validate_ean13(product_id)
         if valid:
             my_order = OrderRequest(product_id=product_id, delivery_address=address, order_type=order_type,
                                   phone_number=phone, zip_code=zip_code)
-            """try:
-                with open("./file_store.json", "w", encoding= "utf-8", newline= "") as file
-                    json.dump(my_order, file, indent=2)
+            try:
+                with open("file_store.json", encoding = "utf8") as file:
+                    data_list = json.load(file)
             except FileNotFoundError as ex:
-                raise OrderManagementException("Wrong file or file path") from ex"""
+                raise OrderManagementException("Wrong file or file path") from ex
+            except json.JSONDecodeError as ex:
+                raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
+
+            try:
+                with open("file_store.json", "w", encoding= "utf-8", newline= "") as file:
+                    data_list = json.load(file)
+                    json.dump(data_list, file, indent=2)
+            except FileNotFoundError as ex:
+                raise OrderManagementException("Wrong file or file path") from ex
             return my_order.order_id
         raise OrderManagementException("Invalid EAN13 code string")
+
+    def create_json(self, file):
+        pass

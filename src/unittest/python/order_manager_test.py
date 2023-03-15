@@ -1,4 +1,5 @@
 import os
+import json
 from pathlib import Path
 from unittest import TestCase
 from freezegun import freeze_time
@@ -15,11 +16,12 @@ class TestOrderManager(TestCase):
             os.remove(file_store)
 
         my_order = OrderManager()
-        my_value = my_order.register_order(product_id="3662168005326", address="calle colmenarejo",
-                                            zip_code="28345", phone="123456789", order_type="premium")
+        my_value = my_order.register_order(product_id="3662168005326", address="calle colmenarejo asdjaispjda",
+                                            zip_code="28345", phone="123456789", order_type="PREMIUM")
         self.assertEqual("a5d8a05c1d4c9dfd9eb8bf48d23cd804", my_value)
+
         with (open(file_store,"r", encoding= "UTF-8", newline="")) as file:
-            data_list= json.load(file)
+            data_list = json.load(file)
         found = False
         for i in data_list:
             if i["_OrderRequest__order_id"] == "a5d8a05c1d4c9dfd9eb8bf48d23cd804":
@@ -121,3 +123,11 @@ class TestOrderManager(TestCase):
             value = my_order.register_order("3662168005326", "PREMIUM", "C/LISBOA,4, MADRID, SPAIN", "123456789",
                                             "280055")
         self.assertEqual("Invalid Zip Code", cm.exception.message)
+
+    def test_with_zip_code_invalid(self):
+        my_order = OrderManager()
+        with self.assertRaises(OrderManagementException) as cm:
+            value = my_order.register_order("3662168005326", "PREMIUM", "C/LISBOA,4, MADRID, SPAIN", "123456789",
+                                            "54005")
+        self.assertEqual("Invalid Zip Code", cm.exception.message)
+
