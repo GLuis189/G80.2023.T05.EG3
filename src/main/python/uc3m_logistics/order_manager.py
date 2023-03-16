@@ -49,22 +49,25 @@ class OrderManager:
         if valid:
             my_order = OrderRequest(product_id=product_id, delivery_address=address, order_type=order_type,
                                   phone_number=phone, zip_code=zip_code)
+            JSON_STORE_PATH = str(Path.home()) + "\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
+            file_store = JSON_STORE_PATH  + "store_request.json"
             try:
-                with open("file_store.json", encoding = "utf8") as file:
+                with open(file_store,"r", encoding = "utf8") as file:
                     data_list = json.load(file)
             except FileNotFoundError as ex:
-                raise OrderManagementException("Wrong file or file path") from ex
+                data_list = []
             except json.JSONDecodeError as ex:
                 raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
 
+            data_list.append(my_order.__dict__)
+
             try:
-                with open("file_store.json", "w", encoding= "utf-8", newline= "") as file:
-                    data_list = json.load(file)
+                with open(file_store, "w", encoding= "utf-8", newline= "") as file:
+                    #data_list = json.load(file)
                     json.dump(data_list, file, indent=2)
             except FileNotFoundError as ex:
                 raise OrderManagementException("Wrong file or file path") from ex
+
             return my_order.order_id
         raise OrderManagementException("Invalid EAN13 code string")
 
-    def create_json(self, file):
-        pass

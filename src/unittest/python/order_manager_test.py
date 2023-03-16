@@ -1,3 +1,4 @@
+import json
 import os
 from pathlib import Path
 from unittest import TestCase
@@ -5,25 +6,51 @@ from freezegun import freeze_time
 from uc3m_logistics import OrderManager
 from uc3m_logistics import OrderManagementException
 
+
 class TestOrderManager(TestCase):
 
     @freeze_time("2023-02-19")
-    def test_register_order_okey(self):
-        JSON_FILES_PATH = str(Path.home()) + ""
-        file_store = JSON_FILES_PATH + "store_order_request.json"
-        if os.path.isfile(file_store):
-            os.remove(file_store)
-
+    def test_register_order_okey_premium(self):
+        """if os.path.isfile(file_store):
+            os.remove(file_store)"""
+        #COMPROBACIÓN DEL HASH
         my_order = OrderManager()
-        my_value = my_order.register_order(product_id="3662168005326", address="calle colmenarejo",
-                                            zip_code="28345", phone="123456789", order_type="premium")
-        self.assertEqual("a5d8a05c1d4c9dfd9eb8bf48d23cd804", my_value)
+        my_value = my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
+                                            zip_code="28345", phone="123456789", order_type="PREMIUM")
+        self.assertEqual("f72071fad57d01cd121d6dde86ae3fa5", my_value)
+        #COMPROBACIÓN DE QUE LO GUARDA EN EL ALMACÉN
+        JSON_FILES_PATH = str(Path.home()) + "\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
+        file_store = JSON_FILES_PATH + "store_request.json"
         with (open(file_store,"r", encoding= "UTF-8", newline="")) as file:
             data_list= json.load(file)
         found = False
         for i in data_list:
-            if i["_OrderRequest__order_id"] == "a5d8a05c1d4c9dfd9eb8bf48d23cd804":
+            if i["_OrderRequest__order_id"] == my_value:
                 found = True
+        if found == False:
+            data_list.append(my_order.__dict__)
+        self.assertTrue(found)
+
+    @freeze_time("2023-02-19")
+    def test_register_order_okey_regular(self):
+        """if os.path.isfile(file_store):
+            os.remove(file_store)"""
+        # COMPROBACIÓN DEL HASH
+        my_order = OrderManager()
+        my_value = my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
+                                           zip_code="28345", phone="123456789", order_type="REGULAR")
+        self.assertEqual("2cce00815ff818105d168f74bc8ddcd3", my_value)
+        # COMPROBACIÓN DE QUE LO GUARDA EN EL ALMACÉN
+        JSON_FILES_PATH = str(Path.home()) + "\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
+        file_store = JSON_FILES_PATH + "store_request.json"
+        with (open(file_store, "r", encoding="UTF-8", newline="")) as file:
+            data_list = json.load(file)
+        found = False
+        for i in data_list:
+            if i["_OrderRequest__order_id"] == my_value:
+                found = True
+        if found == False:
+            data_list.append(my_order.__dict__)
         self.assertTrue(found)
 
     def test_with_product_code_wrong_character(self):
