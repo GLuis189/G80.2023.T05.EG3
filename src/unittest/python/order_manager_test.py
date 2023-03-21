@@ -86,14 +86,15 @@ class TestOrderManager(TestCase):
         self.assertEqual("Invalid Order Type", cm.exception.message)
 
     def test_with_address_wrong_short(self):
+        string = "a" * 18 + " "
         my_order = OrderManager()
         with self.assertRaises(OrderManagementException) as cm:
-            value = my_order.register_order("8421691423220", "PREMIUM", "C/LISBOA,4, MADRIDD", "123456789",
+            value = my_order.register_order("8421691423220", "PREMIUM", string, "123456789",
                                             "28005")
         self.assertEqual("Invalid Address", cm.exception.message)
 
     def test_with_address_wrong_long(self):
-        string = "a" * 101
+        string = "a" * 50 + " " + "a" * 50
         my_order = OrderManager()
         with self.assertRaises(OrderManagementException) as cm:
             value = my_order.register_order("3662168005326", "PREMIUM", string, "123456789",

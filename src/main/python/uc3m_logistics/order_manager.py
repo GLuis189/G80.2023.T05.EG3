@@ -35,7 +35,7 @@ class OrderManager:
     def register_order(self, product_id, order_type, address, phone, zip_code):
         if order_type != "PREMIUM" and order_type != "REGULAR":
             raise OrderManagementException("Invalid Order Type")
-        if len(address) < 20 and len(address) > 100:
+        if len(address) < 19 and len(address) > 101:
             raise OrderManagementException("Invalid Address")
         if len(re.findall(" ", address)) == 0:
             raise OrderManagementException("Invalid Address")
@@ -46,28 +46,29 @@ class OrderManager:
         if not zip_rgx.match(zip_code) or (int(zip_code[0]) > 4 and int(zip_code[1]) > 2):
             raise OrderManagementException("Invalid Zip Code")
         valid = self.validate_ean13(product_id)
-        if valid:
-            my_order = OrderRequest(product_id=product_id, delivery_address=address, order_type=order_type,
-                                  phone_number=phone, zip_code=zip_code)
-            JSON_STORE_PATH = str(Path.home()) + "\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
-            file_store = JSON_STORE_PATH  + "store_request.json"
-            try:
-                with open(file_store,"r", encoding = "utf8") as file:
-                    data_list = json.load(file)
-            except FileNotFoundError as ex:
-                data_list = []
-            except json.JSONDecodeError as ex:
-                raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
+        if not valid:
+            raise OrderManagementException("Invalid EAN13 code string")
 
-            data_list.append(my_order.__dict__)
+        my_order = OrderRequest(product_id=product_id, delivery_address=address, order_type=order_type,
+                              phone_number=phone, zip_code=zip_code)
+        JSON_STORE_PATH = str(Path.home()) + "\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
+        file_store = JSON_STORE_PATH + "store_request.json"
+        try:
+            with open(file_store,"r", encoding = "utf8") as file:
+                data_list = json.load(file)
+        except FileNotFoundError as ex:
+            data_list = []
+        except json.JSONDecodeError as ex:
+            raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
 
-            try:
-                with open(file_store, "w", encoding= "utf-8", newline= "") as file:
-                    #data_list = json.load(file)
-                    json.dump(data_list, file, indent=2)
-            except FileNotFoundError as ex:
-                raise OrderManagementException("Wrong file or file path") from ex
+        data_list.append(my_order.__dict__)
 
-            return my_order.order_id
-        raise OrderManagementException("Invalid EAN13 code string")
+        try:
+            with open(file_store, "w", encoding= "utf-8", newline= "") as file:
+                #data_list = json.load(file)
+                json.dump(data_list, file, indent=2)
+        except FileNotFoundError as ex:
+            raise OrderManagementException("Wrong file or file path") from ex
+
+        return my_order.order_id
 
