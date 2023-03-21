@@ -72,3 +72,27 @@ class OrderManager:
 
         return my_order.order_id
 
+    def send_product(self, file):
+        JSON_STORE_PATH = str(Path.home()) + "/PycharmProjects/G80.2023.T05.EG37/src/JSON/store/"
+        file_store = JSON_STORE_PATH + file
+        try:
+            with open(file_store,"r", encoding = "utf8") as file:
+                data_list = json.load(file)
+        except FileNotFoundError as ex:
+            raise OrderManagementException("Not exist")
+        except json.JSONDecodeError as ex:
+            raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
+        email_rgx = re.compile("[A-Za-z0-9]+@[a-z0-9.]+.[a-z]{2,3}")
+        hash_rgx = re.compile("a-f0-9{32}")
+        for i in data_list:
+            if not hash_rgx.match(i["OrderID"]):
+                raise OrderManagementException("Invalid hash")
+            if not email_rgx.match(i["ContactEmail"]):
+                raise OrderManagementException("Invalid email")
+
+
+        print(data_list)
+        return 0
+
+
+
