@@ -35,7 +35,7 @@ class OrderManager:
     def register_order(self, product_id, order_type, address, phone, zip_code):
         if order_type != "PREMIUM" and order_type != "REGULAR":
             raise OrderManagementException("Invalid Order Type")
-        if len(address) < 19 and len(address) > 101:
+        if len(address) < 20 or len(address) > 100:
             raise OrderManagementException("Invalid Address")
         if len(re.findall(" ", address)) == 0:
             raise OrderManagementException("Invalid Address")
