@@ -14,7 +14,7 @@ class TestOrderManager(TestCase):
         file = JSON_STORE_PATH + "test1_correct.json"
         my_order=OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
-                                              zip_code="28345", phone="123456789", order_type="PREMIUM")
+                                zip_code="28345", phone="123456789", order_type="PREMIUM")
         my_value = my_order.send_product(file)
         self.assertEqual("19c6f9850bee5e10f75770fd58afb9f79b4951794fec0055ea59c6eb15ac4620", my_value)
         store = str(Path.home()) + "\PycharmProjects\G80.2023.T05.EG3\src\JSON\store\store_shipping.json"
