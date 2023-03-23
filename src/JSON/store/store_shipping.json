@@ -1,0 +1,12 @@
+[
+  {
+    "_OrderShipping__alg": "SHA-256",
+    "_OrderShipping__type": "DS",
+    "_OrderShipping__product_id": "3662168005326",
+    "_OrderShipping__order_id": "f72071fad57d01cd121d6dde86ae3fa5",
+    "_OrderShipping__delivery_email": "prueba@gmail.com",
+    "_OrderShipping__issued_at": 1676764800.0,
+    "_OrderShipping__delivery_day": 1676851200.0,
+    "_OrderShipping__tracking_code": "19c6f9850bee5e10f75770fd58afb9f79b4951794fec0055ea59c6eb15ac4620"
+  }
+]
