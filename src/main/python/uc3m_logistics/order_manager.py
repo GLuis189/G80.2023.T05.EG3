@@ -1,10 +1,11 @@
 """Module """
 import json
 import re
-import os
+import hashlib
 from pathlib import Path
 from .order_request import OrderRequest
 from .order_management_exception import OrderManagementException
+from .order_shipping import OrderShipping
 class OrderManager:
     """Class for providing the methods for managing the orders"""
     def __init__(self):
@@ -72,27 +73,64 @@ class OrderManager:
 
         return my_order.order_id
 
-    def send_product(self, file):
-        JSON_STORE_PATH = str(Path.home()) + "/PycharmProjects/G80.2023.T05.EG37/src/JSON/store/"
-        file_store = JSON_STORE_PATH + file
+    def send_product(self, file_send):
+        JSON_STORE_PATH = str(Path.home()) + "\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
+        file_store = JSON_STORE_PATH + "store_request.json"
+        # Abrir el fichero parámetro
         try:
-            with open(file_store,"r", encoding = "utf8") as file:
-                data_list = json.load(file)
+            with open(file_send,"r", encoding = "utf8") as file:
+                data_list_send = json.load(file)
         except FileNotFoundError as ex:
             raise OrderManagementException("Not exist")
         except json.JSONDecodeError as ex:
             raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
+        # Comprobar el estado de los parámetros del archivo parámetro
         email_rgx = re.compile("[A-Za-z0-9]+@[a-z0-9.]+.[a-z]{2,3}")
-        hash_rgx = re.compile("a-f0-9{32}")
-        for i in data_list:
-            if not hash_rgx.match(i["OrderID"]):
-                raise OrderManagementException("Invalid hash")
-            if not email_rgx.match(i["ContactEmail"]):
-                raise OrderManagementException("Invalid email")
+        hash_rgx = re.compile("[a-f0-9]{32}")
+        try:
+            with open(file_store,"r", encoding = "utf-8") as file:
+                data_list_store = json.load(file)
+        except FileNotFoundError as ex:
+            raise OrderManagementException("Not exist")
+        except json.JSONDecodeError as ex:
+            raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
 
+        if not hash_rgx.match(data_list_send["OrderID"]):
+            raise OrderManagementException("Invalid hash")
+        if not email_rgx.match(data_list_send["ContactEmail"]):
+            raise OrderManagementException("Invalid email")
+        # Comprobar que el OrderId esté en le almacén
+        found = False
+        for i in data_list_store:
+            if i["_OrderRequest__order_id"] == data_list_send["OrderID"]:
+                found = True
+                my_order_shipping = OrderShipping(product_id=i["_OrderRequest__product_id"],
+                                                  order_id=data_list_send["OrderID"],
+                                                  delivery_email=data_list_send["ContactEmail"],
+                                                  order_type=i["_OrderRequest__order_type"])
+        if not found:
+            raise OrderManagementException("OrderId not in store")
 
-        print(data_list)
-        return 0
+        # Crear el fichero alamcen de envios
+        file_store_shipping = JSON_STORE_PATH + "store_shipping.json"
+        try:
+            with open(file_store_shipping,"r", encoding = "utf8") as file:
+                data_list = json.load(file)
+        except FileNotFoundError as ex:
+            data_list = []
+        except json.JSONDecodeError as ex:
+            raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
+
+        data_list.append(my_order_shipping.__dict__)
+
+        try:
+            with open(file_store_shipping, "w", encoding= "utf-8", newline= "") as file:
+                json.dump(data_list, file, indent=2)
+        except FileNotFoundError as ex:
+            raise OrderManagementException("Wrong file or file path") from ex
+
+        return my_order_shipping.tracking_code()
+
 
 
 
