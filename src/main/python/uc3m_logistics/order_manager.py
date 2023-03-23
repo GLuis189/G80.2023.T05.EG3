@@ -85,8 +85,8 @@ class OrderManager:
         except json.JSONDecodeError as ex:
             raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
         # Comprobar el estado de los parámetros del archivo parámetro
-        email_rgx = re.compile("[A-Za-z0-9]+@[a-z0-9.]+.[a-z]{2,3}")
-        hash_rgx = re.compile("[a-f0-9]{32}")
+        email_rgx = re.compile("[A-Za-z0-9]+@[a-z0-9.]+.[a-z]{2,3}$")
+        hash_rgx = re.compile("[a-f0-9]{32}$")
         try:
             with open(file_store,"r", encoding = "utf-8") as file:
                 data_list_store = json.load(file)
@@ -101,16 +101,17 @@ class OrderManager:
             raise OrderManagementException("Invalid email")
         # Comprobar que el OrderId esté en le almacén
         found = False
+        index = 0
         for i in data_list_store:
             if i["_OrderRequest__order_id"] == data_list_send["OrderID"]:
                 found = True
-                my_order_shipping = OrderShipping(product_id=i["_OrderRequest__product_id"],
-                                                  order_id=data_list_send["OrderID"],
-                                                  delivery_email=data_list_send["ContactEmail"],
-                                                  order_type=i["_OrderRequest__order_type"])
+                index = i
         if not found:
             raise OrderManagementException("OrderId not in store")
-
+        my_order_shipping = OrderShipping(product_id=index["_OrderRequest__product_id"],
+                                          order_id=data_list_send["OrderID"],
+                                          delivery_email=data_list_send["ContactEmail"],
+                                          order_type=index["_OrderRequest__order_type"])
         # Crear el fichero alamcen de envios
         file_store_shipping = JSON_STORE_PATH + "store_shipping.json"
         try:
@@ -129,7 +130,7 @@ class OrderManager:
         except FileNotFoundError as ex:
             raise OrderManagementException("Wrong file or file path") from ex
 
-        return my_order_shipping.tracking_code()
+        return my_order_shipping.tracking_code
 
 
 
