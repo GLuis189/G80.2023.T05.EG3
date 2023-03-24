@@ -1,11 +1,12 @@
 """Module """
 import json
 import re
-import hashlib
 from pathlib import Path
 from .order_request import OrderRequest
 from .order_management_exception import OrderManagementException
 from .order_shipping import OrderShipping
+
+
 class OrderManager:
     """Class for providing the methods for managing the orders"""
     def __init__(self):
@@ -13,6 +14,7 @@ class OrderManager:
 
     @staticmethod
     def validate_ean13(ean13_code):
+        """Function for validating ean13"""
         # PLEASE INCLUDE HERE THE CODE FOR VALIDATING THE GUID
         # RETURN TRUE IF THE GUID IS RIGHT, OR FALSE IN OTHER CASE
         pattern_rgx = re.compile("[0-9]{13}$")
@@ -34,7 +36,8 @@ class OrderManager:
         return False
 
     def register_order(self, product_id, order_type, address, phone, zip_code):
-        if order_type != "PREMIUM" and order_type != "REGULAR":
+        """Function for validating and creating order, if not raise exceptions"""
+        if order_type not in "PREMIUM" and order_type not in "REGULAR":
             raise OrderManagementException("Invalid Order Type")
         if len(address) < 20 or len(address) > 100:
             raise OrderManagementException("Invalid Address")
@@ -52,12 +55,12 @@ class OrderManager:
 
         my_order = OrderRequest(product_id=product_id, delivery_address=address, order_type=order_type,
                               phone_number=phone, zip_code=zip_code)
-        JSON_STORE_PATH = str(Path.home()) + "\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
-        file_store = JSON_STORE_PATH + "store_request.json"
+        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
+        file_store = json_store_path + "store_request.json"
         try:
             with open(file_store,"r", encoding = "utf8") as file:
                 data_list = json.load(file)
-        except FileNotFoundError as ex:
+        except FileNotFoundError:
             data_list = []
         except json.JSONDecodeError as ex:
             raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
@@ -74,14 +77,15 @@ class OrderManager:
         return my_order.order_id
 
     def send_product(self, file_send):
-        JSON_STORE_PATH = str(Path.home()) + "\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
-        file_store = JSON_STORE_PATH + "store_request.json"
+        """Sends the product """
+        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
+        file_store = json_store_path  + "store_request.json"
         # Abrir el fichero parámetro
         try:
             with open(file_send,"r", encoding = "utf8") as file:
                 data_list_send = json.load(file)
         except FileNotFoundError as ex:
-            raise OrderManagementException("Not exist")
+            raise OrderManagementException("Not exist") from ex
         except json.JSONDecodeError as ex:
             raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
         # Comprobar el estado de los parámetros del archivo parámetro
@@ -91,7 +95,7 @@ class OrderManager:
             with open(file_store,"r", encoding = "utf-8") as file:
                 data_list_store = json.load(file)
         except FileNotFoundError as ex:
-            raise OrderManagementException("Not exist")
+            raise OrderManagementException("Not exist") from ex
         except json.JSONDecodeError as ex:
             raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
 
@@ -113,7 +117,7 @@ class OrderManager:
                                           delivery_email=data_list_send["ContactEmail"],
                                           order_type=index["_OrderRequest__order_type"])
         # Crear el fichero alamcen de envios
-        file_store_shipping = JSON_STORE_PATH + "store_shipping.json"
+        file_store_shipping = json_store_path + "store_shipping.json"
         try:
             with open(file_store_shipping,"r", encoding = "utf8") as file:
                 data_list = json.load(file)
@@ -131,7 +135,3 @@ class OrderManager:
             raise OrderManagementException("Wrong file or file path") from ex
 
         return my_order_shipping.tracking_code
-
-
-
-
