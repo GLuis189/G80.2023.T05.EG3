@@ -8,8 +8,6 @@ from uc3m_logistics import OrderManager
 from uc3m_logistics import OrderManagementException
 
 
-
-
 class TestOrderManager(TestCase):
     """Class representing the information required for TEST ORDER MANAGER"""
     @freeze_time("2023-02-19")
@@ -1454,8 +1452,4 @@ class TestOrderManager(TestCase):
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
-
-
-
-
 
