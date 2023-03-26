@@ -88,11 +88,13 @@ class OrderManager:
             raise OrderManagementException("Not exist") from ex
         except json.JSONDecodeError as ex:
             raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
+        if data_list_send == {}:
+            raise OrderManagementException("JSON Decode Error - Wrong JSON Format")
         claves = list(data_list_send.keys())
         if not ("OrderID" in claves and "ContactEmail" in claves):
             raise OrderManagementException("Invalid key")
         # Comprobar el estado de los parámetros del archivo parámetro
-        email_rgx = re.compile("[A-Za-z0-9]+@[a-z0-9]+[.]{1}[a-z]{2,3}$")
+        email_rgx = re.compile("[A-Za-z0-9]+@[A-Za-z0-9]+[.]{1}[A-Za-z]{2,3}$")
         hash_rgx = re.compile("[a-f0-9]{32}$")
         try:
             with open(file_store,"r", encoding = "utf-8") as file:

@@ -563,7 +563,7 @@ class TestOrderManager(TestCase):
                                 zip_code="28345", phone="123456789", order_type="PREMIUM")
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
-        self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
+        self.assertEqual("Invalid key", cm.exception.message)
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
@@ -815,7 +815,7 @@ class TestOrderManager(TestCase):
                                 zip_code="28345", phone="123456789", order_type="PREMIUM")
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
-        self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
+        self.assertEqual("Invalid key", cm.exception.message)
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
@@ -1200,23 +1200,24 @@ class TestOrderManager(TestCase):
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
 
-    def test_send_product_incorrect_t41_duplicate(self):
-        """TEST NOT OKEY OF SEND PRODUCT T3DUPLICATE"""
+    @freeze_time("2023-02-19")
+    def test_send_product_correct_t41_duplicate(self):
+        """TEST OKEY OF SEND PRODUCT"""
         json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
-        file_send = json_store_path + "test41_delete.json"
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
-            file = str(file)
-            hash_original = hashlib.md5(file.encode()).hexdigest()
+        file = json_store_path + "test41_duplicate.json"
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
                                 zip_code="28345", phone="123456789", order_type="PREMIUM")
-        with self.assertRaises(OrderManagementException) as cm:
-            my_order.send_product(file_send)
-        self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
-            file = str(file)
-            hash_lib = hashlib.md5(file.encode()).hexdigest()
-        self.assertEqual(hash_original, hash_lib)
+        my_value = my_order.send_product(file)
+        self.assertEqual("19c6f9850bee5e10f75770fd58afb9f79b4951794fec0055ea59c6eb15ac4620", my_value)
+        store = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store\store_shipping.json"
+        with open(store,"r", encoding = "utf-8") as file:
+            data_list_file = json.load(file)
+        found = False
+        for i in data_list_file:
+            if i["_OrderShipping__tracking_code"] == my_value:
+                found = True
+        self.assertTrue(found)
 
     def test_send_product_incorrect_t42_delete(self):
         """TEST NOT OKEY OF SEND PRODUCT T3DUPLICATE"""
@@ -1272,23 +1273,24 @@ class TestOrderManager(TestCase):
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
 
-    def test_send_product_incorrect_t43_duplicate(self):
-        """TEST NOT OKEY OF SEND PRODUCT T3DUPLICATE"""
+    @freeze_time("2023-02-19")
+    def test_send_product_correct_t43_duplicate(self):
+        """TEST OKEY OF SEND PRODUCT"""
         json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
-        file_send = json_store_path + "test43_duplicate.json"
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
-            file = str(file)
-            hash_original = hashlib.md5(file.encode()).hexdigest()
+        file = json_store_path + "test43_duplicate.json"
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
                                 zip_code="28345", phone="123456789", order_type="PREMIUM")
-        with self.assertRaises(OrderManagementException) as cm:
-            my_order.send_product(file_send)
-        self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
-            file = str(file)
-            hash_lib = hashlib.md5(file.encode()).hexdigest()
-        self.assertEqual(hash_original, hash_lib)
+        my_value = my_order.send_product(file)
+        self.assertEqual("19c6f9850bee5e10f75770fd58afb9f79b4951794fec0055ea59c6eb15ac4620", my_value)
+        store = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store\store_shipping.json"
+        with open(store, "r", encoding="utf-8") as file:
+            data_list_file = json.load(file)
+        found = False
+        for i in data_list_file:
+            if i["_OrderShipping__tracking_code"] == my_value:
+                found = True
+        self.assertTrue(found)
 
     def test_send_product_incorrect_t44_delete(self):
         """TEST NOT OKEY OF SEND PRODUCT T3DUPLICATE"""
@@ -1362,23 +1364,25 @@ class TestOrderManager(TestCase):
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
 
-    def test_send_product_incorrect_t47_modify(self):
-        """TEST NOT OKEY OF SEND PRODUCT T3DUPLICATE"""
+    @freeze_time("2023-02-19")
+    def test_send_product_correct_t47_modify(self):
+        """TEST OKEY OF SEND PRODUCT"""
         json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
-        file_send = json_store_path + "test47_modify.json"
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
-            file = str(file)
-            hash_original = hashlib.md5(file.encode()).hexdigest()
+        file = json_store_path + "test47_modify.json"
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
                                 zip_code="28345", phone="123456789", order_type="PREMIUM")
-        with self.assertRaises(OrderManagementException) as cm:
-            my_order.send_product(file_send)
-        self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
-            file = str(file)
-            hash_lib = hashlib.md5(file.encode()).hexdigest()
-        self.assertEqual(hash_original, hash_lib)
+        my_value = my_order.send_product(file)
+        self.assertEqual("19c6f9850bee5e10f75770fd58afb9f79b4951794fec0055ea59c6eb15ac4620", my_value)
+        store = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store\store_shipping.json"
+        with open(store,"r", encoding = "utf-8") as file:
+            data_list_file = json.load(file)
+        found = False
+        for i in data_list_file:
+            if i["_OrderShipping__tracking_code"] == my_value:
+                found = True
+        self.assertTrue(found)
+
 
 
     def test_send_product_incorrect_t48_modify(self):
@@ -1399,23 +1403,24 @@ class TestOrderManager(TestCase):
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
 
-    def test_send_product_incorrect_t49_modify(self):
-        """TEST NOT OKEY OF SEND PRODUCT T3DUPLICATE"""
+    @freeze_time("2023-02-19")
+    def test_send_product_correct_t49_modify(self):
+        """TEST OKEY OF SEND PRODUCT"""
         json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
-        file_send = json_store_path + "test49_modify.json"
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
-            file = str(file)
-            hash_original = hashlib.md5(file.encode()).hexdigest()
+        file = json_store_path + "test49_modify.json"
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
                                 zip_code="28345", phone="123456789", order_type="PREMIUM")
-        with self.assertRaises(OrderManagementException) as cm:
-            my_order.send_product(file_send)
-        self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
-            file = str(file)
-            hash_lib = hashlib.md5(file.encode()).hexdigest()
-        self.assertEqual(hash_original, hash_lib)
+        my_value = my_order.send_product(file)
+        self.assertEqual("19c6f9850bee5e10f75770fd58afb9f79b4951794fec0055ea59c6eb15ac4620", my_value)
+        store = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store\store_shipping.json"
+        with open(store, "r", encoding="utf-8") as file:
+            data_list_file = json.load(file)
+        found = False
+        for i in data_list_file:
+            if i["_OrderShipping__tracking_code"] == my_value:
+                found = True
+        self.assertTrue(found)
 
     def test_send_product_incorrect_t50_modify(self):
         """TEST NOT OKEY OF SEND PRODUCT T3DUPLICATE"""
@@ -1452,4 +1457,78 @@ class TestOrderManager(TestCase):
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
+
+    def test_send_product_incorrect_hash_short(self):
+        """TEST NOT OKEY SHORT HASH"""
+        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
+        file_send = json_store_path + "test_hash_short.json"
+        with open(file_send, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
+            hash_original = hashlib.md5(file.encode()).hexdigest()
+        my_order = OrderManager()
+        my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
+                                zip_code="28345", phone="123456789", order_type="PREMIUM")
+        with self.assertRaises(OrderManagementException) as cm:
+            my_order.send_product(file_send)
+        self.assertEqual("Invalid hash", cm.exception.message)
+        with open(file_send, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
+            hash_lib = hashlib.md5(file.encode()).hexdigest()
+        self.assertEqual(hash_original, hash_lib)
+
+    def test_send_product_incorrect_hash_long(self):
+        """TEST NOT OKEY LONG HASH"""
+        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
+        file_send = json_store_path + "test_hash_long.json"
+        with open(file_send, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
+            hash_original = hashlib.md5(file.encode()).hexdigest()
+        my_order = OrderManager()
+        my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
+                                zip_code="28345", phone="123456789", order_type="PREMIUM")
+        with self.assertRaises(OrderManagementException) as cm:
+            my_order.send_product(file_send)
+        self.assertEqual("Invalid hash", cm.exception.message)
+        with open(file_send, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
+            hash_lib = hashlib.md5(file.encode()).hexdigest()
+        self.assertEqual(hash_original, hash_lib)
+
+    def test_send_product_incorrect_hash_character(self):
+        """TEST NOT OKEY INCORRECT CHARACTER HASH"""
+        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
+        file_send = json_store_path + "test_hash_character.json"
+        with open(file_send, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
+            hash_original = hashlib.md5(file.encode()).hexdigest()
+        my_order = OrderManager()
+        my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
+                                zip_code="28345", phone="123456789", order_type="PREMIUM")
+        with self.assertRaises(OrderManagementException) as cm:
+            my_order.send_product(file_send)
+        self.assertEqual("Invalid hash", cm.exception.message)
+        with open(file_send, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
+            hash_lib = hashlib.md5(file.encode()).hexdigest()
+        self.assertEqual(hash_original, hash_lib)
+
+    def test_send_product_incorrect_email_long(self):
+        """TEST NOT OKEY LONG EMAIL"""
+        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
+        file_send = json_store_path + "test_email_long.json"
+        with open(file_send, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
+            hash_original = hashlib.md5(file.encode()).hexdigest()
+        my_order = OrderManager()
+        my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
+                                zip_code="28345", phone="123456789", order_type="PREMIUM")
+        with self.assertRaises(OrderManagementException) as cm:
+            my_order.send_product(file_send)
+        self.assertEqual("Invalid email", cm.exception.message)
+        with open(file_send, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
+            hash_lib = hashlib.md5(file.encode()).hexdigest()
+        self.assertEqual(hash_original, hash_lib)
+
+
 
