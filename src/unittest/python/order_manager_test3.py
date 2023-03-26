@@ -1,5 +1,6 @@
 import json
 import hashlib
+import os
 from pathlib import Path
 from unittest import TestCase
 from freezegun import freeze_time
@@ -36,3 +37,34 @@ class TestOrderManager(TestCase):
         my_order = OrderManager()
         delivery = my_order.deliver_product(self.crear_my_order_premium())
         self.assertTrue(delivery)
+
+    def test_deliver_path1(self):
+        my_order = OrderManager()
+        hash = "x"
+        with self.assertRaises(OrderManagementException) as cm:
+            my_order.deliver_product(hash)
+        self.assertEqual("Invalid tracking number" , cm.exception.message)
+
+    def test_deliver_path2(self):
+        my_order = OrderManager()
+        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
+        file_store_shipping = json_store_path + "store_shipping.json"
+        if os.path.isfile(file_store_shipping):
+            os.remove(file_store_shipping)
+        hash = "6d32ac3991586ab58f8ff2ddf4a2de61f35a46f6bdc20121c5f57a91f0f6ccd4"
+        with self.assertRaises(OrderManagementException) as cm:
+            my_order.deliver_product(hash)
+        self.assertEqual( "File doesn't exist", cm.exception.message)
+
+    def test_deliver_path3(self):
+        my_order = OrderManager()
+        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
+        file_store_shipping = json_store_path + "store_shipping_test.json"
+        if os.path.isfile(file_store_shipping):
+            os.remove(file_store_shipping)
+        with open(file_store_shipping,"w", encoding="utf8") as file:
+            json.dump(data, file, indent=2)
+        hash = "6d32ac3991586ab58f8ff2ddf4a2de61f35a46f6bdc20121c5f57a91f0f6ccd4"
+        with self.assertRaises(OrderManagementException) as cm:
+            my_order.deliver_product(hash)
+        self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)

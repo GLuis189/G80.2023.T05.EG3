@@ -176,18 +176,13 @@ class OrderManager:
                 data_list = json.load(file)
         except FileNotFoundError as ex:
             data_list = []
-        except json.JSONDecodeError as ex:
-            raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
         delivery = {"_Tracking__number": index["_OrderShipping__tracking_code"],
                     "_Delivery__day": index["_OrderShipping__delivery_day"]}
 
         data_list.append(delivery)
 
-        try:
-            with open(file_store_delivery, "w", encoding= "utf-8", newline= "") as file:
-                json.dump(data_list, file, indent=2)
-        except FileNotFoundError as ex:
-            raise OrderManagementException("Wrong file or file path") from ex
+        with open(file_store_delivery, "w", encoding= "utf-8", newline= "") as file:
+            json.dump(data_list, file, indent=2)
         return True
 
 
