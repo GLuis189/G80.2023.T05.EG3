@@ -2,6 +2,7 @@
 import json
 import re
 from pathlib import Path
+from datetime import datetime
 from .order_request import OrderRequest
 from .order_management_exception import OrderManagementException
 from .order_shipping import OrderShipping
@@ -140,3 +141,51 @@ class OrderManager:
             raise OrderManagementException("Wrong file or file path") from ex
 
         return my_order_shipping.tracking_code
+
+    def deliver_product(self, tracking_number):
+        tracking_number_regex = re.compile("[a-f0-9]{64}")
+        if not tracking_number_regex.match(tracking_number):
+            raise OrderManagementException("Invalid tracking number")
+        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
+        file_store_shipping = json_store_path + "store_shipping.json"
+        try:
+            with open(file_store_shipping,"r", encoding = "utf8") as file:
+                data_list_store = json.load(file)
+        except json.JSONDecodeError as ex:
+            raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
+        found = False
+        index = 0
+        for i in data_list_store:
+            if i["_OrderShipping__tracking_code"] == tracking_number:
+                index = i
+                found = True
+        if not found:
+            raise OrderManagementException("Not found tracking number")
+        to_day = datetime.utcnow()
+        to_day = datetime.timestamp(to_day)
+        to_day = datetime.fromtimestamp(to_day).date()
+        time_delivery = index["_OrderShipping__delivery_day"]
+        time_delivery = datetime.fromtimestamp(time_delivery).date()
+        if to_day != time_delivery:
+            raise OrderManagementException("Incorrect delivery date")
+        file_store_delivery = json_store_path + "store_delivery.json"
+        try:
+            with open(file_store_delivery,"r", encoding = "utf8") as file:
+                data_list = json.load(file)
+        except FileNotFoundError as ex:
+            data_list = []
+        except json.JSONDecodeError as ex:
+            raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
+        delivery = {"_Tracking__number": index["_OrderShipping__tracking_code"],
+                    "_Delivery__day": index["_OrderShipping__delivery_day"]}
+
+        data_list.append(delivery)
+
+        try:
+            with open(file_store_delivery, "w", encoding= "utf-8", newline= "") as file:
+                json.dump(data_list, file, indent=2)
+        except FileNotFoundError as ex:
+            raise OrderManagementException("Wrong file or file path") from ex
+        return True
+
+
