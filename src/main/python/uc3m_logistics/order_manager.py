@@ -151,6 +151,8 @@ class OrderManager:
         try:
             with open(file_store_shipping,"r", encoding = "utf8") as file:
                 data_list_store = json.load(file)
+        except FileNotFoundError as ex:
+            raise OrderManagementException("File doesn't exist") from ex
         except json.JSONDecodeError as ex:
             raise OrderManagementException("JSON Decode Error - Wrong JSON Format") from ex
         found = False

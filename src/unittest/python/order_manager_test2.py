@@ -29,6 +29,24 @@ class TestOrderManager(TestCase):
                 found = True
         self.assertTrue(found)
 
+    def test_send_product_incorrect_vacio(self):
+        """TEST NOT OKEY OF SEND PRODUCT T2DELETE"""
+        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
+        file_send = json_store_path + "test_vacio.json"
+        with open(file_send, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
+            hash_original = hashlib.md5(file.encode()).hexdigest()
+        my_order = OrderManager()
+        my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
+                                zip_code="28345", phone="123456789", order_type="PREMIUM")
+        with self.assertRaises(OrderManagementException) as cm:
+            my_order.send_product(file_send)
+        self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
+        with open(file_send, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
+            hash_lib = hashlib.md5(file.encode()).hexdigest()
+        self.assertEqual(hash_original, hash_lib)
+
     def test_send_product_incorrect_t2_delete(self):
         """TEST NOT OKEY OF SEND PRODUCT T2DELETE"""
         json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
