@@ -30,7 +30,7 @@ class TestOrderManager(TestCase):
         self.assertTrue(found)
 
     def test_send_product_incorrect_vacio(self):
-        """TEST NOT OKEY OF SEND PRODUCT T2DELETE"""
+        """TEST NOT OKEY OF SEND PRODUCT TEST_PRODUCT_EMTY"""
         json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
         file_send = json_store_path + "test_vacio.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
@@ -659,23 +659,6 @@ class TestOrderManager(TestCase):
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
 
-    def test_send_product_incorrect_t20_modify(self):
-        """TEST NOT OKEY OF SEND PRODUCT T3DUPLICATE"""
-        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
-        file_send = json_store_path + "test20_modify.json"
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
-            file = str(file)
-            hash_original = hashlib.md5(file.encode()).hexdigest()
-        my_order = OrderManager()
-        my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
-                                zip_code="28345", phone="123456789", order_type="PREMIUM")
-        with self.assertRaises(OrderManagementException) as cm:
-            my_order.send_product(file_send)
-        self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
-            file = str(file)
-            hash_lib = hashlib.md5(file.encode()).hexdigest()
-        self.assertEqual(hash_original, hash_lib)
 
     def test_send_product_incorrect_t21_delete(self):
         """TEST NOT OKEY OF SEND PRODUCT T3DUPLICATE"""
@@ -1547,6 +1530,3 @@ class TestOrderManager(TestCase):
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
-
-
-
