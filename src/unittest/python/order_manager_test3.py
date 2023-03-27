@@ -65,9 +65,11 @@ class TestOrderManager(TestCase):
             my_order.deliver_product(hash_delivery)
         self.assertEqual( "File doesn't exist", cm.exception.message)
 
+    @freeze_time("2023-02-20")
     def test_deliver_path3(self):
         """TEST PATH3"""
         my_order = OrderManager()
+        my_order.deliver_product(self.crear_my_order_premium())
         hash_delivery = "6d32ac3991586ab58f8ff2ddf4a2de61f35a4688bdc20121c5f57a91f0f6ccd4"
         with self.assertRaises(OrderManagementException) as cm:
             my_order.deliver_product(hash_delivery)
