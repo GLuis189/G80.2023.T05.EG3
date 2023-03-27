@@ -75,7 +75,6 @@ class TestOrderManager(TestCase):
             my_order.deliver_product(hash_delivery)
         self.assertEqual("Not found tracking number", cm.exception.message)
 
-
     def test_deliver_path4_premium(self):
         """TEST PATH4_PREMIUM"""
         my_order = OrderManager()
