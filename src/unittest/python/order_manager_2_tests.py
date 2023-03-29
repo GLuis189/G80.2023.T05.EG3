@@ -46,7 +46,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -68,7 +68,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -90,7 +90,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -112,7 +112,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -134,7 +134,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -156,7 +156,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -178,7 +178,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -200,7 +200,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -213,6 +213,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -220,7 +222,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -233,6 +235,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -240,7 +244,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -253,6 +257,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -260,7 +266,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -273,6 +279,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -280,7 +288,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -293,6 +301,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -300,7 +310,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -313,6 +323,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -320,7 +332,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -333,6 +345,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -340,7 +354,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -353,6 +367,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -360,7 +376,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -373,6 +389,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -380,7 +398,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -393,6 +411,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -400,7 +420,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -413,6 +433,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -420,7 +442,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -433,6 +455,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -440,7 +464,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -453,6 +477,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -460,7 +486,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -473,6 +499,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -480,7 +508,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -493,6 +521,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -500,7 +530,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -513,6 +543,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -520,7 +552,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -533,6 +565,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -540,7 +574,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -553,6 +587,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -560,7 +596,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -573,6 +609,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -580,7 +618,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -593,6 +631,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -600,7 +640,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -613,6 +653,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -620,7 +662,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -633,6 +675,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -640,7 +684,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -653,6 +697,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -660,7 +706,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid key", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -673,6 +719,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -680,7 +728,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid key", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -693,6 +741,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -700,7 +750,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -713,6 +763,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -720,7 +772,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -733,6 +785,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -740,7 +794,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -754,6 +808,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -761,7 +817,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -774,6 +830,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -781,7 +839,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -794,6 +852,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -801,7 +861,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid hash", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -814,6 +874,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -821,7 +883,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid hash", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -834,6 +896,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -841,7 +905,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -854,6 +918,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -861,7 +927,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -874,6 +940,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -881,7 +949,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -894,6 +962,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -901,7 +971,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -914,6 +984,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -921,7 +993,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid key", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -934,6 +1006,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -941,7 +1015,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid key", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -954,6 +1028,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -961,7 +1037,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -974,6 +1050,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -981,7 +1059,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -994,6 +1072,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1001,7 +1081,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1014,6 +1094,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1021,7 +1103,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1034,6 +1116,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1041,7 +1125,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1054,6 +1138,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1061,7 +1147,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1074,6 +1160,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1081,7 +1169,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1094,6 +1182,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1101,7 +1191,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1114,6 +1204,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1121,7 +1213,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1134,6 +1226,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1141,7 +1235,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1154,6 +1248,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1161,7 +1257,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid key", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1174,6 +1270,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1181,7 +1279,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1194,6 +1292,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1201,7 +1301,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1214,6 +1314,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1221,7 +1323,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid hash", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1234,6 +1336,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1241,7 +1345,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1254,6 +1358,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1261,7 +1367,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1274,6 +1380,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1281,7 +1389,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid key", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1294,6 +1402,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1301,7 +1411,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1314,6 +1424,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1321,7 +1433,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1335,6 +1447,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1342,7 +1456,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1352,8 +1466,6 @@ class TestOrderManager(TestCase):
         """TEST OKEY OF SEND PRODUCT T41_DUPLICATE"""
         json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
         file = json_store_path + "test41_duplicate.json"
-        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
-        file_store = json_store_path + "store_shipping.json"
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
                                 zip_code="28345", phone="123456789", order_type="PREMIUM")
@@ -1376,6 +1488,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1383,7 +1497,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1396,6 +1510,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1403,7 +1519,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1416,6 +1532,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1423,7 +1541,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1433,8 +1551,6 @@ class TestOrderManager(TestCase):
         """TEST OKEY OF SEND PRODUCT T43_DUPLICATE"""
         json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
         file = json_store_path + "test43_duplicate.json"
-        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
-        file_store = json_store_path + "store_shipping.json"
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
                                 zip_code="28345", phone="123456789", order_type="PREMIUM")
@@ -1457,6 +1573,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1464,7 +1582,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1477,6 +1595,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1484,7 +1604,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1497,6 +1617,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1504,7 +1626,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1517,6 +1639,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1524,7 +1648,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("JSON Decode Error - Wrong JSON Format", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1534,8 +1658,6 @@ class TestOrderManager(TestCase):
         """TEST OKEY OF SEND PRODUCT T47_MODIFY"""
         json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
         file = json_store_path + "test47_modify.json"
-        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
-        file_store = json_store_path + "store_shipping.json"
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
                                 zip_code="28345", phone="123456789", order_type="PREMIUM")
@@ -1569,7 +1691,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1579,8 +1701,6 @@ class TestOrderManager(TestCase):
         """TEST OKEY OF SEND PRODUCT T49_MODIFY"""
         json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\send/"
         file = json_store_path + "test49_modify.json"
-        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
-        file_store = json_store_path + "store_shipping.json"
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
                                 zip_code="28345", phone="123456789", order_type="PREMIUM")
@@ -1625,6 +1745,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1632,7 +1754,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1645,6 +1767,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1652,7 +1776,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid hash", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1665,6 +1789,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1672,7 +1798,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid hash", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1685,6 +1811,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1692,7 +1820,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid hash", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
@@ -1705,6 +1833,8 @@ class TestOrderManager(TestCase):
         file_store = json_store_path + "store_shipping.json"
         with open(file_send, "r", encoding="utf-8", newline="") as file:
             file = str(file)
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
+            file = str(file)
             hash_original = hashlib.md5(file.encode()).hexdigest()
         my_order = OrderManager()
         my_order.register_order(product_id="3662168005326", address="C/LISBOA,4, MADRID, SPAIN",
@@ -1712,7 +1842,7 @@ class TestOrderManager(TestCase):
         with self.assertRaises(OrderManagementException) as cm:
             my_order.send_product(file_send)
         self.assertEqual("Invalid email", cm.exception.message)
-        with open(file_send, "r", encoding="utf-8", newline="") as file:
+        with open(file_store, "r", encoding="utf-8", newline="") as file:
             file = str(file)
             hash_lib = hashlib.md5(file.encode()).hexdigest()
         self.assertEqual(hash_original, hash_lib)
