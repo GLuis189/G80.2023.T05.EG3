@@ -153,6 +153,28 @@ class TestOrderManager(TestCase):
                 found = True
         self.assertFalse(found)
 
+    @freeze_time("2023-02-19")
+    def test_with_address_correct_long21(self):
+        """TEST ADDRESS LENGTH 21 """
+        string = "a" * 10 + " " + "a" * 10
+        # COMPROBACIÓN VALOR LIMITE 21
+        my_order = OrderManager()
+        my_value = my_order.register_order(product_id="3662168005326", address=string,
+                                           zip_code="28345", phone="123456789", order_type="REGULAR")
+        self.assertEqual("0cb76404d82d0984ccf67027d7a8b1ae", my_value)
+        # COMPROBACIÓN DE QUE LO GUARDA EN EL ALMACÉN
+        json_files_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
+        file_store = json_files_path + "store_request.json"
+        with (open(file_store, "r", encoding="UTF-8", newline="")) as file:
+            data_list = json.load(file)
+        found = False
+        for i in data_list:
+            if i["_OrderRequest__order_id"] == my_value:
+                found = True
+        if not found:
+            data_list.append(my_order.__dict__)
+        self.assertTrue(found)
+
     def test_with_address_wrong_long(self):
         """TEST WRONG ADDRESS """
         string = "a" * 50 + " " + "a" * 50
@@ -170,6 +192,28 @@ class TestOrderManager(TestCase):
             if i["_OrderRequest__delivery_address"] == string:
                 found = True
         self.assertFalse(found)
+
+    @freeze_time("2023-02-19")
+    def test_with_address_correct_long99(self):
+        """TEST ADDRESS LENGTH 99 """
+        string = "a" * 49 + " " + "a" * 49
+        # COMPROBACIÓN VALOR LIMITE 99
+        my_order = OrderManager()
+        my_value = my_order.register_order(product_id="3662168005326", address=string,
+                                           zip_code="28345", phone="123456789", order_type="REGULAR")
+        self.assertEqual("75d2107e967f0e8fbb2637084d9c0807", my_value)
+        # COMPROBACIÓN DE QUE LO GUARDA EN EL ALMACÉN
+        json_files_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
+        file_store = json_files_path + "store_request.json"
+        with (open(file_store, "r", encoding="UTF-8", newline="")) as file:
+            data_list = json.load(file)
+        found = False
+        for i in data_list:
+            if i["_OrderRequest__order_id"] == my_value:
+                found = True
+        if not found:
+            data_list.append(my_order.__dict__)
+        self.assertTrue(found)
 
     def test_with_address_wrong_spaces(self):
         """TEST WRONG ADDRESS """
