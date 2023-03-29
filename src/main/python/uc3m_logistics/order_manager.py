@@ -41,7 +41,8 @@ class OrderManager:
     def register_order(self, product_id, order_type, address, phone, zip_code):
         """Function for validating and creating order, if not raise exceptions"""
         #CHECK IF ORDER IS OKEY
-        if order_type not in "PREMIUM" and order_type not in "REGULAR":
+        lista = ["PREMIUM","REGULAR"]
+        if not order_type in lista:
             raise OrderManagementException("Invalid Order Type")
         if len(address) < 20 or len(address) > 100:
             raise OrderManagementException("Invalid Address")

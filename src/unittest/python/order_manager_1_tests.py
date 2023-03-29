@@ -122,7 +122,7 @@ class TestOrderManager(TestCase):
         """TEST WRONG ORDER_TYPE """
         my_order = OrderManager()
         with self.assertRaises(OrderManagementException) as cm:
-            my_order.register_order("842169142322", "PRE", "C/LISBOA,4, MADRID, SPAIN", "123456789",
+            my_order.register_order("3662168005326", "PRE", "C/LISBOA,4, MADRID, SPAIN", "123456789",
                                             "28005")
         self.assertEqual("Invalid Order Type", cm.exception.message)
         json_files_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
