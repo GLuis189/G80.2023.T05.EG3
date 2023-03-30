@@ -51,7 +51,7 @@ class TestOrderManager(TestCase):
         hash_delivery = "x"
         with self.assertRaises(OrderManagementException) as cm:
             my_order.deliver_product(hash_delivery)
-        self.assertEqual("Invalid tracking number" , cm.exception.message)
+        self.assertEqual("Invalid tracking number", cm.exception.message)
 
     def test_deliver_path2(self):
         """TEST PATH2"""
@@ -63,7 +63,7 @@ class TestOrderManager(TestCase):
         hash_delivery = "6d32ac3991586ab58f8ff2ddf4a2de61f35a46f6bdc20121c5f57a91f0f6ccd4"
         with self.assertRaises(OrderManagementException) as cm:
             my_order.deliver_product(hash_delivery)
-        self.assertEqual( "File doesn't exist", cm.exception.message)
+        self.assertEqual("File doesn't exist", cm.exception.message)
 
     @freeze_time("2023-02-20")
     def test_deliver_path3(self):
@@ -75,14 +75,7 @@ class TestOrderManager(TestCase):
             my_order.deliver_product(hash_delivery)
         self.assertEqual("Not found tracking number", cm.exception.message)
 
-    def test_deliver_path4_premium(self):
-        """TEST PATH4_PREMIUM"""
-        my_order = OrderManager()
-        with self.assertRaises(OrderManagementException) as cm:
-            my_order.deliver_product(self.crear_my_order_premium())
-        self.assertEqual("Incorrect delivery date", cm.exception.message)
-
-    def test_deliver_path4_regular(self):
+    def test_deliver_path4(self):
         """TEST PATH4_REGULAR"""
         my_order = OrderManager()
         with self.assertRaises(OrderManagementException) as cm:
@@ -90,7 +83,7 @@ class TestOrderManager(TestCase):
         self.assertEqual("Incorrect delivery date", cm.exception.message)
 
     @freeze_time("2023-02-20")
-    def test_deliver_path5_premium(self):
+    def test_deliver_path5(self):
         """TEST PATH5_PREMIUM"""
         my_order = OrderManager()
         json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
@@ -100,27 +93,18 @@ class TestOrderManager(TestCase):
         delivery = my_order.deliver_product(self.crear_my_order_premium())
         self.assertTrue(delivery)
 
-    @freeze_time("2023-02-26")
-    def test_deliver_path5_regular(self):
-        """TEST PATH5_REGULAR"""
-        my_order = OrderManager()
-        json_store_path = str(Path.home()) + r"\PycharmProjects\G80.2023.T05.EG3\src\JSON\store/"
-        file_store_delivery = json_store_path + "store_delivery.json"
-        if os.path.isfile(file_store_delivery):
-            os.remove(file_store_delivery)
-        delivery = my_order.deliver_product(self.crear_my_order_regular())
-        self.assertTrue(delivery)
-
-    @freeze_time("2023-02-20")
-    def test_deliver_path6_premium(self):
-        """TEST PATH6_PREMIUM"""
-        my_order = OrderManager()
-        delivery = my_order.deliver_product(self.crear_my_order_premium())
-        self.assertTrue(delivery)
 
     @freeze_time("2023-02-26")
-    def test_deliver_path6_regular(self):
+    def test_deliver_path6(self):
         """TEST PATH5_REGULAR"""
         my_order = OrderManager()
         delivery = my_order.deliver_product(self.crear_my_order_regular())
+        self.assertTrue(delivery)
+    @freeze_time("2023-02-26")
+    def test_deliver_bucle_for(self):
+        """TEST PARA EL FOR REGULAR"""
+        my_order = OrderManager()
+        delivery = my_order.deliver_product(self.crear_my_order_regular())
+        for _ in range(6):
+            delivery = my_order.deliver_product(self.crear_my_order_regular())
         self.assertTrue(delivery)
