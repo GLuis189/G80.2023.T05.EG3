@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="order_manager_3_tests.TestOrderManager-20230330213727" tests="9" file="order_manager_3_tests.py" time="0.417" timestamp="2023-03-30T21:37:31" failures="0" errors="0" skipped="0">
+	<testcase classname="order_manager_3_tests.TestOrderManager" name="test_deliver_bucle_for" time="0.216" timestamp="2023-03-30T21:37:30"/>
+	<testcase classname="order_manager_3_tests.TestOrderManager" name="test_deliver_path1" time="0.002" timestamp="2023-03-30T21:37:30"/>
+	<testcase classname="order_manager_3_tests.TestOrderManager" name="test_deliver_path2" time="0.002" timestamp="2023-03-30T21:37:30"/>
+	<testcase classname="order_manager_3_tests.TestOrderManager" name="test_deliver_path3" time="0.031" timestamp="2023-03-30T21:37:30"/>
+	<testcase classname="order_manager_3_tests.TestOrderManager" name="test_deliver_path4" time="0.030" timestamp="2023-03-30T21:37:30"/>
+	<testcase classname="order_manager_3_tests.TestOrderManager" name="test_deliver_path5" time="0.029" timestamp="2023-03-30T21:37:30"/>
+	<testcase classname="order_manager_3_tests.TestOrderManager" name="test_deliver_path6" time="0.038" timestamp="2023-03-30T21:37:31"/>
+	<testcase classname="order_manager_3_tests.TestOrderManager" name="test_deliver_product_premium" time="0.034" timestamp="2023-03-30T21:37:31"/>
+	<testcase classname="order_manager_3_tests.TestOrderManager" name="test_deliver_product_regular" time="0.035" timestamp="2023-03-30T21:37:31"/>
+</testsuite>
